@@ -10,13 +10,12 @@ def auto_crop_image(image):
         # Detect faces in the image
         faces = faceCascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
         faces = faceCascade.detectMultiScale(gray, 1.2, 5)
-        
+        roi_color=None
         if len(faces) > 0:
             # Draw a rectangle around the faces
             for (x, y, w, h) in faces:
-                #roi_color = image[y-50:y+h+50, x-50:x+w+50]
-                #img_item = "anchor.png"
-                #cv2.imwrite(img_item,cv2.resize(roi_color,(96,96)))
+                roi_color = image[y-50:y+h+50, x-50:x+w+50]
+
                 cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)        
             (x, y, w, h) = faces[0]
             
@@ -33,4 +32,4 @@ def auto_crop_image(image):
                 crpim = cv2.resize(crpim, (224,224), interpolation = cv2.INTER_AREA)
                 print("Found {0} faces!".format(len(faces)))
                 return crpim, image, (x, y, w, h)
-    return None, image, (0,0,0,0)
+    return roi_color, image, (0,0,0,0)
