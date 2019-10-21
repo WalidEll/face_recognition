@@ -4,7 +4,7 @@ import cv2
 def auto_crop_image(image):
     if image is not None:
         im = image.copy()
-        classifierPath='/Users/shikova/anaconda3/lib/python3.7/site-packages/cv2/data/haarcascade_frontalface_default.xml'
+        classifierPath='./classifiers/haarcascade_frontalface_default.xml'
         faceCascade = cv2.CascadeClassifier(classifierPath)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # Detect faces in the image
